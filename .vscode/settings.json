@@ -1,0 +1,9 @@
+{
+  "editor.defaultFormatter": "redhat.java",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "java.format.enabled": true,
+  "spring-boot.ls.problem.application-properties.PROP_UNKNOWN_PROPERTY": "IGNORE",
+  "java.configuration.updateBuildConfiguration": "interactive"
+}
