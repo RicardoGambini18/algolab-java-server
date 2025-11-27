@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "algolab")
-public class AlgolabProperties {
+@ConfigurationProperties(prefix = "app")
+public class AppProperties {
   private int moviesSortLimit;
   private int warmupIterations;
 
