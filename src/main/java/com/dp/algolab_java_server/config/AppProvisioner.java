@@ -11,12 +11,19 @@ import com.dp.algolab_java_server.common.DesignPattern;
 @DesignPattern(type = "Facade", justification = "Provee una interfaz unificada para ocultar la complejidad de la inicialización del entorno (archivos, variables, descargas), desacoplando al cliente (Main) de estos subsistemas.")
 public class AppProvisioner {
   private final Logger log;
+  private static final String PROVISIONER_EXECUTED_PROP = "app.provisioner.executed";
 
   public AppProvisioner() {
     this.log = Logger.getInstance();
   }
 
   public void initialize() {
+    if (System.getProperty(PROVISIONER_EXECUTED_PROP) != null) {
+      return;
+    }
+
+    System.setProperty(PROVISIONER_EXECUTED_PROP, "true");
+
     log.info("Iniciando Algolab");
     log.info("Validando configuración");
 
