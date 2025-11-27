@@ -1,0 +1,65 @@
+package com.dp.algolab_java_server.config;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.springframework.core.io.Resource;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.resource.PathResourceResolver;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+
+import com.dp.algolab_java_server.common.Logger;
+import com.dp.algolab_java_server.common.DesignPattern;
+
+@Configuration
+@DesignPattern(name = "Strategy", justification = "Implementa una estrategia personalizada para servir archivos estáticos desde la carpeta frontend. Si la ruta solicitada no corresponde a un archivo real ni a la API, entrega el 'index.html' para permitir la navegación dentro de la aplicación.")
+public class WebConfig implements WebMvcConfigurer {
+  private final Logger log;
+  private static final String API_PREFIX = "api/";
+  private static final String FRONTEND_DIR = "frontend";
+  private static final String INDEX_HTML_FILE_NAME = "index.html";
+
+  public WebConfig() {
+    this.log = Logger.getInstance();
+  }
+
+  @Override
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    if (!Files.exists(Paths.get(FRONTEND_DIR).resolve(INDEX_HTML_FILE_NAME))) {
+      return;
+    }
+
+    log.info("Sirviendo archivos estáticos desde la carpeta: " + FRONTEND_DIR);
+
+    registry.addResourceHandler("/**")
+        .addResourceLocations("file:" + FRONTEND_DIR + "/")
+        .resourceChain(true)
+        .addResolver(new PathResourceResolver() {
+          @Override
+          protected Resource getResource(String resourcePath, Resource location) throws IOException {
+            if (resourcePath == null || resourcePath.isBlank() || "/".equals(resourcePath)) {
+              return location.createRelative(INDEX_HTML_FILE_NAME);
+            }
+
+            Resource requestedResource = location.createRelative(resourcePath);
+
+            if (requestedResource.exists() && requestedResource.isReadable() && requestedResource.getFile().isFile()) {
+              return requestedResource;
+            }
+
+            if (resourcePath.startsWith(API_PREFIX)) {
+              return null;
+            }
+
+            return location.createRelative(INDEX_HTML_FILE_NAME);
+          }
+        });
+  }
+
+  @Override
+  public void addViewControllers(ViewControllerRegistry registry) {
+    registry.addViewController("/").setViewName("forward:/" + INDEX_HTML_FILE_NAME);
+  }
+}

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import org.slf4j.LoggerFactory;
 import java.time.format.DateTimeFormatter;
 
-@DesignPattern(type = "Singleton", justification = "Garantiza que exista una única instancia del Logger para centralizar la configuración de colores y tener un control ordenado de lo que se imprime en la consola.")
+@DesignPattern(name = "Singleton", justification = "Garantiza que exista una única instancia del Logger para centralizar la configuración de colores y tener un control ordenado de lo que se imprime en la consola.")
 public class Logger {
   private static final Logger instance = new Logger();
   private final org.slf4j.Logger internalLogger;

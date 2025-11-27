@@ -34,3 +34,6 @@ build/
 
 ### SQLite ###
 algolab.db
+
+### Frontend ###
+frontend/

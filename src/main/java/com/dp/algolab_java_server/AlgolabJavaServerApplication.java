@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 import com.dp.algolab_java_server.config.AppProperties;
-import com.dp.algolab_java_server.config.AppProvisioner;
+import com.dp.algolab_java_server.config.provisioner.AppProvisioner;
 
 @SpringBootApplication
 @EnableConfigurationProperties(AppProperties.class)

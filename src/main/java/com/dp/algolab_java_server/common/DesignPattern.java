@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.SOURCE)
 @Target({ ElementType.TYPE, ElementType.METHOD, ElementType.FIELD })
 public @interface DesignPattern {
-  String type();
+  String name();
 
   String justification() default "";
 }
