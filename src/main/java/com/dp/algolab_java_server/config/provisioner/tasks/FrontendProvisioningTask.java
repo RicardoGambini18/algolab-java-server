@@ -30,7 +30,7 @@ public class FrontendProvisioningTask implements ProvisioningTask {
         return true;
       }
 
-      Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
+      Dotenv dotenv = Dotenv.configure().ignoreIfMissing().ignoreIfMalformed().load();
       String FRONTEND_ZIP_GOOGLE_DRIVE_ID = dotenv.get(FRONTEND_ZIP_GOOGLE_DRIVE_ID_ENV_KEY);
 
       log.info("Eliminando directorio " + FRONTEND_DIR + " y archivo " + ZIP_FILENAME + " si existen");

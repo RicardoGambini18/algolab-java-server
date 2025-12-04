@@ -34,7 +34,7 @@ public class AppProvisioner {
   }
 
   public void initialize() {
-    if (isProvisioningCompleted()) {
+    if (isProvisioningExecuted()) {
       return;
     }
 
@@ -48,7 +48,7 @@ public class AppProvisioner {
     runProvisioning();
   }
 
-  private boolean isProvisioningCompleted() {
+  private boolean isProvisioningExecuted() {
     return System.getProperty(PROVISIONER_EXECUTED_PROP) != null;
   }
 

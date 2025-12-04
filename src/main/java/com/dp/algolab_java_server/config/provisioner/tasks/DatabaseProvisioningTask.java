@@ -27,7 +27,7 @@ public class DatabaseProvisioningTask implements ProvisioningTask {
       return true;
     }
 
-    Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
+    Dotenv dotenv = Dotenv.configure().ignoreIfMissing().ignoreIfMalformed().load();
     String SQLITE_DB_GOOGLE_DRIVE_ID = dotenv.get(SQLITE_DB_GOOGLE_DRIVE_ID_ENV_KEY);
 
     try {

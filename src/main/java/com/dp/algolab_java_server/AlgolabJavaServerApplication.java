@@ -13,7 +13,7 @@ import com.dp.algolab_java_server.config.provisioner.AppProvisioner;
 public class AlgolabJavaServerApplication {
 	public static void main(String[] args) {
 		new AppProvisioner().initialize();
-		Dotenv.configure().ignoreIfMissing().systemProperties().load();
+		Dotenv.configure().ignoreIfMissing().ignoreIfMalformed().systemProperties().load();
 		SpringApplication.run(AlgolabJavaServerApplication.class, args);
 	}
 }
