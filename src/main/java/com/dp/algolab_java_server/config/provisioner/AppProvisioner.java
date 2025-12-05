@@ -13,7 +13,7 @@ import com.dp.algolab_java_server.config.provisioner.adapters.FileSystemAdapter;
 import com.dp.algolab_java_server.config.provisioner.tasks.DatabaseProvisioningTask;
 import com.dp.algolab_java_server.config.provisioner.tasks.FrontendProvisioningTask;
 
-@DesignPattern(name = "Facade", justification = "Provee una interfaz unificada que oculta la complejidad de la configuración del entorno, orquestando la instanciación de adaptadores y la ejecución secuencial de tareas de aprovisionamiento.")
+@DesignPattern(name = "Facade", solvedProblem = "Oculta la complejidad y el orden de ejecución de los subsistemas de inicialización (red, sistema de archivos, descompresión), ofreciendo al método Main un único punto de entrada (initialize) para preparar todo el entorno del servidor.")
 public class AppProvisioner {
   private final Logger log;
   private final List<ProvisioningTask> tasks;

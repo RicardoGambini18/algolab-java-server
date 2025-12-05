@@ -6,8 +6,8 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.SOURCE)
-@Target({ ElementType.TYPE, ElementType.METHOD, ElementType.FIELD })
-public @interface DesignPattern {
+@Target({ ElementType.TYPE, ElementType.METHOD, ElementType.FIELD, ElementType.CONSTRUCTOR })
+public @interface SolidPrinciple {
   String name();
 
   String solvedProblem();

@@ -12,7 +12,7 @@ import com.dp.algolab_java_server.common.Logger;
 import com.dp.algolab_java_server.common.DesignPattern;
 
 @RequiredArgsConstructor
-@DesignPattern(name = "Adapter", justification = "Adapta HttpClient para lanzar excepciones controladas en caso de fallo de red o errores HTTP.")
+@DesignPattern(name = "Adapter", solvedProblem = "Adapta la API genérica de 'HttpClient' a las necesidades específicas de descarga de archivos desde Google Drive, centralizando la configuración de redirecciones y manejo de errores HTTP para no contaminar la lógica de las tareas.")
 public class NetworkAdapter {
   private final Logger log;
   private static final String GOOGLE_DRIVE_DOWNLOAD_URL = "https://docs.google.com/uc?export=download&id=";

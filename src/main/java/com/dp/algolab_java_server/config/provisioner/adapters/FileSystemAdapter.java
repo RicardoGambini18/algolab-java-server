@@ -12,7 +12,7 @@ import com.dp.algolab_java_server.common.Logger;
 import com.dp.algolab_java_server.common.DesignPattern;
 
 @RequiredArgsConstructor
-@DesignPattern(name = "Adapter", justification = "Envuelve las operaciones de java.nio.Files propagando excepciones para que el cliente decida el flujo de error.")
+@DesignPattern(name = "Adapter", solvedProblem = "Envuelve las operaciones estándar de 'java.nio.Files' para proveer una interfaz más limpia y orientada al dominio, estandarizando el manejo de excepciones de entrada/salida y simplificando operaciones recursivas como el borrado de directorios.")
 public class FileSystemAdapter {
   private final Logger log;
 

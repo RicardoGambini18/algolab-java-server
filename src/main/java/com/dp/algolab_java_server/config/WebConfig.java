@@ -11,10 +11,8 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import com.dp.algolab_java_server.common.Logger;
-import com.dp.algolab_java_server.common.DesignPattern;
 
 @Configuration
-@DesignPattern(name = "Strategy", justification = "Implementa una estrategia personalizada para servir archivos estáticos desde la carpeta frontend. Si la ruta solicitada no corresponde a un archivo real ni a la API, entrega el 'index.html' para permitir la navegación dentro de la aplicación.")
 public class WebConfig implements WebMvcConfigurer {
   private final Logger log;
   private static final String API_PREFIX = "api/";

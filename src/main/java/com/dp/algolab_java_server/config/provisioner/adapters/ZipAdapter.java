@@ -12,7 +12,7 @@ import com.dp.algolab_java_server.common.Logger;
 import com.dp.algolab_java_server.common.DesignPattern;
 
 @RequiredArgsConstructor
-@DesignPattern(name = "Adapter", justification = "Provee una interfaz simplificada para la gestión de archivos ZIP, encapsulando la lógica de streams y protegiendo contra vulnerabilidades como Zip Slip.")
+@DesignPattern(name = "Adapter", solvedProblem = "Adapta la interfaz compleja y de bajo nivel de 'java.util.zip' a un método simple y seguro requerido por el dominio, encapsulando la gestión de Streams y protegiendo la aplicación de vulnerabilidades específicas como Zip Slip.")
 public class ZipAdapter {
   private final Logger log;
 
