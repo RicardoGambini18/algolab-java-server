@@ -19,9 +19,16 @@ public class BrowserLauncher {
 
   private static final String ENV_FILE = ".env";
   private static final String FRONTEND_URL_ENV_KEY = "FRONTEND_URL";
+  private static final String BROWSER_LAUNCHER_EXECUTED_PROP = "app.browser-launcher.executed";
 
   @EventListener(ApplicationReadyEvent.class)
   public void launchBrowser() {
+    if (isBrowserLauncherExecuted()) {
+      return;
+    }
+
+    markBrowserLauncherAsCompleted();
+
     if (!Files.exists(Paths.get(ENV_FILE))) {
       return;
     }
@@ -71,5 +78,13 @@ public class BrowserLauncher {
     } else {
       throw new Exception("Unsupported operating system: " + os);
     }
+  }
+
+  private boolean isBrowserLauncherExecuted() {
+    return System.getProperty(BROWSER_LAUNCHER_EXECUTED_PROP) != null;
+  }
+
+  private void markBrowserLauncherAsCompleted() {
+    System.setProperty(BROWSER_LAUNCHER_EXECUTED_PROP, "true");
   }
 }
