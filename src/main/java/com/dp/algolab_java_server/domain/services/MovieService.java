@@ -7,7 +7,7 @@ import com.dp.algolab_java_server.common.SolidPrinciple;
 
 @SolidPrinciple(name = "Principio de Inversión de Dependencias (DIP)", solvedProblem = "Desacopla el controlador de la implementación concreta de la lógica de negocio de películas. Define los contratos estrictos para la obtención de datos que consumirán los algoritmos de ordenamiento y búsqueda.")
 public interface MovieService {
-  List<Movie> getAllMovies();
+  List<Movie> getAllMovies() throws Exception;
 
-  List<Movie> getMoviesForSorting();
+  List<Movie> getMoviesForSorting() throws Exception;
 }

@@ -17,8 +17,8 @@ import com.dp.algolab_java_server.domain.repositories.MovieRepository;
 @RequiredArgsConstructor
 @SolidPrinciple(name = "Principio de Responsabilidad Única (SRP)", solvedProblem = "Encapsula la lógica de obtención de películas, gestionando las reglas de paginación y ordenamiento requeridas por los algoritmos en un solo lugar, separando esta complejidad de los controladores.")
 public class MovieServiceImpl implements MovieService {
-  private final MovieRepository movieRepository;
   private final AppProperties appProperties;
+  private final MovieRepository movieRepository;
 
   @Override
   @Transactional(readOnly = true)
