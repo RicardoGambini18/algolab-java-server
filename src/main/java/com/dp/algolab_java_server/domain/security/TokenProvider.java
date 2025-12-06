@@ -1,8 +1,5 @@
 package com.dp.algolab_java_server.domain.security;
 
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Claims;
-
 import com.dp.algolab_java_server.domain.entities.User;
 import com.dp.algolab_java_server.common.SolidPrinciple;
 
@@ -10,5 +7,5 @@ import com.dp.algolab_java_server.common.SolidPrinciple;
 public interface TokenProvider {
   String generateToken(User user);
 
-  Jws<Claims> verifyToken(String token);
+  TokenPayload verifyToken(String token);
 }

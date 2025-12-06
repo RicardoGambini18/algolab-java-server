@@ -10,14 +10,17 @@ import javax.crypto.SecretKey;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.dp.algolab_java_server.domain.entities.User;
 import com.dp.algolab_java_server.config.AppProperties;
+import com.dp.algolab_java_server.domain.security.TokenPayload;
 import com.dp.algolab_java_server.domain.security.TokenProvider;
 
 @Component
 @RequiredArgsConstructor
 public class JwtProvider implements TokenProvider {
+  private final ObjectMapper objectMapper;
   private final AppProperties appProperties;
 
   private SecretKey getSigningKey() {
@@ -42,12 +45,19 @@ public class JwtProvider implements TokenProvider {
   }
 
   @Override
-  public Jws<Claims> verifyToken(String token) {
+  public TokenPayload verifyToken(String token) {
     try {
-      return Jwts.parser()
+      Jws<Claims> jws = Jwts.parser()
           .verifyWith(getSigningKey())
           .build()
           .parseSignedClaims(token);
+
+      Claims claims = jws.getPayload();
+
+      Object userClaim = claims.get("user");
+      User user = objectMapper.convertValue(userClaim, User.class);
+
+      return new TokenPayload(user, claims.getExpiration());
     } catch (Exception e) {
       return null;
     }
