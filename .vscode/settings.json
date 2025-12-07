@@ -6,5 +6,5 @@
   "java.format.enabled": true,
   "spring-boot.ls.problem.application-properties.PROP_UNKNOWN_PROPERTY": "IGNORE",
   "java.configuration.updateBuildConfiguration": "automatic",
-  "material-icon-theme.folders.color": "#DB3940"
+  "material-icon-theme.folders.color": "#e0464d"
 }
