@@ -77,7 +77,7 @@ public class JumpSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Vector<T>> 
 
     @Override
     public String getDescription() {
-        return "Combina saltos de tamaño fijo (raíz de n) con búsqueda lineal local. Requiere que los datos estén ordenados. Es un compromiso entre Búsqueda Lineal y Binaria.";
+        return "Requiere arreglo ordenado. Salta un bloque fijo de elementos (raíz de n) hasta superar el objetivo, y luego realiza una búsqueda lineal en el bloque anterior. Es un punto medio entre búsqueda lineal y binaria.";
     }
 
     @Override
@@ -87,7 +87,7 @@ public class JumpSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Vector<T>> 
 
     @Override
     public String getTimeComplexity() {
-        return "O(√n)";
+        return "O(\\sqrt{n})";
     }
 
     @Override
