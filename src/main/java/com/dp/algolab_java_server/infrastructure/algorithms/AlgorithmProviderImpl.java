@@ -14,17 +14,17 @@ import org.springframework.beans.factory.ObjectProvider;
 import com.dp.algolab_java_server.common.DesignPattern;
 import com.dp.algolab_java_server.domain.entities.Movie;
 import com.dp.algolab_java_server.domain.data_structures.Vector;
+import com.dp.algolab_java_server.domain.algorithms.sorting.vector.*;
 import com.dp.algolab_java_server.domain.dtos.DataStructureDefinition;
 import com.dp.algolab_java_server.domain.dtos.SortAlgorithmDefinition;
 import com.dp.algolab_java_server.domain.algorithms.AlgorithmProvider;
 import com.dp.algolab_java_server.domain.data_structures.DataStructure;
+import com.dp.algolab_java_server.domain.algorithms.searching.vector.*;
 import com.dp.algolab_java_server.domain.dtos.SearchAlgorithmDefinition;
 import com.dp.algolab_java_server.domain.algorithms.sorting.SortAlgorithm;
 import com.dp.algolab_java_server.domain.algorithms.utils.AlgorithmProfiler;
 import com.dp.algolab_java_server.domain.exceptions.ResourceNotFoundException;
 import com.dp.algolab_java_server.domain.algorithms.searching.SearchAlgorithm;
-import com.dp.algolab_java_server.domain.algorithms.sorting.vector.BubbleSortVectorAlgorithm;
-import com.dp.algolab_java_server.domain.algorithms.searching.vector.LinearSearchVectorAlgorithm;
 
 @Component
 @RequiredArgsConstructor
@@ -44,9 +44,25 @@ public class AlgorithmProviderImpl implements AlgorithmProvider {
     // Vector Sorting Algorithms
     registerSortingAlgorithm(vector.getKey(),
         algorithmProfiler -> new BubbleSortVectorAlgorithm<>(Movie::getId, algorithmProfiler));
+    registerSortingAlgorithm(vector.getKey(),
+        algorithmProfiler -> new SelectionSortVectorAlgorithm<>(Movie::getId, algorithmProfiler));
+    registerSortingAlgorithm(vector.getKey(),
+        algorithmProfiler -> new InsertionSortVectorAlgorithm<>(Movie::getId, algorithmProfiler));
+    registerSortingAlgorithm(vector.getKey(),
+        algorithmProfiler -> new MergeSortVectorAlgorithm<>(Movie::getId, algorithmProfiler));
+    registerSortingAlgorithm(vector.getKey(),
+        algorithmProfiler -> new QuickSortVectorAlgorithm<>(Movie::getId, algorithmProfiler));
     // Vector Searching Algorithms
     registerSearchingAlgorithm(vector.getKey(),
         algorithmProfiler -> new LinearSearchVectorAlgorithm<>(Movie::getId, algorithmProfiler));
+    registerSearchingAlgorithm(vector.getKey(),
+        algorithmProfiler -> new BinarySearchVectorAlgorithm<>(Movie::getId, algorithmProfiler));
+    registerSearchingAlgorithm(vector.getKey(),
+        algorithmProfiler -> new JumpSearchVectorAlgorithm<>(Movie::getId, algorithmProfiler));
+    registerSearchingAlgorithm(vector.getKey(),
+        algorithmProfiler -> new ExponentialSearchVectorAlgorithm<>(Movie::getId, algorithmProfiler));
+    registerSearchingAlgorithm(vector.getKey(),
+        algorithmProfiler -> new InterpolationSearchVectorAlgorithm<>(Movie::getId, algorithmProfiler));
   }
 
   private void registerDataStructure(DataStructure<?> dataStructure) {
