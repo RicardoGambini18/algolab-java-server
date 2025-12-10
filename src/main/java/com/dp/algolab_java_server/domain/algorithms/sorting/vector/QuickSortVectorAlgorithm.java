@@ -22,18 +22,16 @@ public class QuickSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
     }
 
     private Vector<T> recursiveQuickSort(Vector<T> data) {
-        algorithmProfiler.incrementIterations(); // Entrada a la recursión
+        algorithmProfiler.incrementIterations();
 
         int n = data.length();
         if (n <= 1) {
             return data;
         }
 
-        // Selección del pivote (elemento central)
         T pivot = data.at(n / 2);
         int pivotValue = valueGetter.getValue(pivot);
 
-        // Vectores auxiliares para la partición
         Vector<T> left = new Vector<>(new ArrayList<>());
         left.setAlgorithmProfiler(algorithmProfiler);
 
@@ -43,18 +41,17 @@ public class QuickSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
         Vector<T> right = new Vector<>(new ArrayList<>());
         right.setAlgorithmProfiler(algorithmProfiler);
 
-        // Partición
         for (int i = 0; i < n; i++) {
             algorithmProfiler.incrementIterations();
 
             T x = data.at(i);
             int xValue = valueGetter.getValue(x);
 
-            algorithmProfiler.incrementOperations(1); // Comparación x < pivot
+            algorithmProfiler.incrementOperations(1);
             if (xValue < pivotValue) {
                 left.push(x);
             } else {
-                algorithmProfiler.incrementOperations(1); // Comparación x == pivot
+                algorithmProfiler.incrementOperations(1);
                 if (xValue == pivotValue) {
                     middle.push(x);
                 } else {
@@ -63,15 +60,12 @@ public class QuickSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
             }
         }
 
-        // Llamadas recursivas
         Vector<T> leftSorted = recursiveQuickSort(left);
         Vector<T> rightSorted = recursiveQuickSort(right);
 
-        // Concatenación de resultados
         Vector<T> result = new Vector<>(new ArrayList<>());
         result.setAlgorithmProfiler(algorithmProfiler);
 
-        // extend() autoincrementa las operaciones según el tamaño de la lista a agregar
         result.extend(leftSorted);
         result.extend(middle);
         result.extend(rightSorted);
@@ -91,12 +85,12 @@ public class QuickSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
 
     @Override
     public String getName() {
-        return "Ordenamiento rápido (Quick Sort)";
+        return "Ordenamiento rápido (Quick sort)";
     }
 
     @Override
     public String getDescription() {
-        return "Estrategia 'Divide y Vencerás' que selecciona un elemento pivote y particiona el arreglo en subarreglos de elementos menores y mayores al pivote. Es muy eficiente en la práctica (O(n log n) promedio), aunque su peor caso es O(n^2).";
+        return "Selecciona un pivote y particiona el arreglo en elementos menores y mayores a este, ordenando recursivamente. Es uno de los algoritmos más rápidos en la práctica (promedio), aunque su peor caso es cuadrático si el pivote no es ideal.";
     }
 
     @Override
@@ -111,7 +105,7 @@ public class QuickSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
 
     @Override
     public String getSpaceComplexity() {
-        return "O(n)";
+        return "O(n log n)";
     }
 
     @Override
