@@ -18,15 +18,13 @@ public class MergeSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
 
     @Override
     protected Vector<T> sort(Vector<T> vector) {
-        // El algoritmo recursivo devuelve un nuevo vector ordenado, no modifica
-        // in-place (generalmente).
         return recursiveMergeSort(vector);
     }
 
     private Vector<T> recursiveMergeSort(Vector<T> vector) {
-        algorithmProfiler.incrementIterations(); // Entrada a algoritmo (nodo del árbol)
+        algorithmProfiler.incrementIterations();
 
-        int n = vector.length(); // Costo 0
+        int n = vector.length();
 
         if (n <= 1) {
             return vector;
@@ -34,7 +32,6 @@ public class MergeSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
 
         int mid = n / 2;
 
-        // slice() autoincrementa operaciones (copia de memoria)
         Vector<T> left = vector.slice(0, mid);
         Vector<T> right = vector.slice(mid, n);
 
@@ -56,24 +53,23 @@ public class MergeSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
         while (i < nLeft && j < nRight) {
             algorithmProfiler.incrementIterations();
 
-            T itemA = left.at(i); // Op +1 (Lectura)
-            T itemB = right.at(j); // Op +1 (Lectura)
+            T itemA = left.at(i);
+            T itemB = right.at(j);
             int valA = valueGetter.getValue(itemA);
             int valB = valueGetter.getValue(itemB);
 
-            algorithmProfiler.incrementOperations(1); // Comparación de Negocio (valA <= valB)
+            algorithmProfiler.incrementOperations(1);
             if (valA <= valB) {
-                merged.push(itemA); // Op +1 (Escritura/Inserción)
+                merged.push(itemA);
                 i++;
             } else {
-                merged.push(itemB); // Op +1 (Escritura/Inserción)
+                merged.push(itemB);
                 j++;
             }
         }
 
-        // Agregar remanentes
         if (i < nLeft) {
-            // slice + extend = costo proporcional al tamaño (autocontado por Vector)
+
             merged.extend(left.slice(i, nLeft));
         }
 
@@ -96,12 +92,12 @@ public class MergeSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
 
     @Override
     public String getName() {
-        return "Ordenamiento por mezcla (Merge Sort)";
+        return "Ordenamiento por fusión (Merge sort)";
     }
 
     @Override
     public String getDescription() {
-        return "Algoritmo eficiente 'Divide y Vencerás'. Divide recursivamente el arreglo en mitades hasta tener subarreglos triviales, luego los fusiona en orden. Garantiza un desempeño constante O(n log n) pero requiere espacio adicional O(n).";
+        return "Estrategia de divide y vencerás: divide el arreglo en mitades, ordena recursivamente y luego aplica una fusión ordenada de las sublistas. Garantiza un rendimiento estable O(n log n) incluso en el peor caso, a costa de memoria adicional.";
     }
 
     @Override
@@ -121,6 +117,6 @@ public class MergeSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
 
     @Override
     public AlgorithmComplexityLevel getSpaceComplexityLevel() {
-        return AlgorithmComplexityLevel.MEDIUM;
+        return AlgorithmComplexityLevel.HIGH;
     }
 }
