@@ -90,7 +90,7 @@ public class ExponentialSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Vect
 
     @Override
     public String getDescription() {
-        return "Combina una búsqueda de rango exponencial con búsqueda binaria. Ideal para arreglos no acotados o cuando el elemento buscado está cerca del inicio.";
+        return "Requiere arreglo ordenado. Útil para listas infinitas o de tamaño desconocido. Encuentra el rango donde reside el elemento creciendo exponencialmente y luego aplica búsqueda binaria.";
     }
 
     @Override
