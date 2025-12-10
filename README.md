@@ -2,12 +2,16 @@
 
 Algolab es un laboratorio interactivo enfocado en comparar algoritmos de búsqueda y ordenamiento, midiendo tiempo de ejecución, uso de memoria, número de operaciones y número de iteraciones para cada implementación disponible. Esta es la versión Java del servidor.
 
+## 🎯 Configuración Local Automática
+
+Este proyecto soporta **configuración automática**. Esta rutina se ejecuta automáticamente al iniciar la aplicación **solo si no existe ninguna configuración previa** (es decir, si no se detecta el archivo `.env`). En ese caso, el sistema generará el archivo `.env` necesario y configurará el entorno con valores por defecto para facilitar el despliegue local.
+
 ## 📊 Métricas Registradas
 
 Cada ejecución de un algoritmo reporta las siguientes métricas para facilitar el análisis comparativo:
 
 - **Tiempo (ns):** Duración total medida con `System.nanoTime()`.
-- **Memoria (bytes):** Diferencia aproximada de memoria utilizada durante la ejecución.
+- **Memoria (bytes):** Calculada como `Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()`.
 - **Operaciones:** Conteo acumulado de comparaciones, asignaciones y operaciones matemáticas relevantes dentro del algoritmo.
 - **Iteraciones:** Total de ciclos ejecutados en bucles y llamadas recursivas, útil para dimensionar el esfuerzo estructural del algoritmo.
 
