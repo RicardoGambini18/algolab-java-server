@@ -27,12 +27,12 @@ public class BinarySearchVectorAlgorithm<T> extends SearchAlgorithm<T, Vector<T>
             T item = vector.at(mid);
             int val = valueGetter.getValue(item);
 
-            algorithmProfiler.incrementOperations(1); // Comparación ==
+            algorithmProfiler.incrementOperations(1);
             if (val == valueToFind) {
                 return item;
             }
 
-            algorithmProfiler.incrementOperations(1); // Comparación <
+            algorithmProfiler.incrementOperations(1);
             if (val < valueToFind) {
                 low = mid + 1;
             } else {
@@ -60,7 +60,7 @@ public class BinarySearchVectorAlgorithm<T> extends SearchAlgorithm<T, Vector<T>
 
     @Override
     public String getDescription() {
-        return "Algoritmo eficiente que divide repetidamente el intervalo de búsqueda a la mitad. Requiere que los datos estén ordenados. Ideal para grandes volúmenes de datos.";
+        return "Requiere arreglo ordenado. Divide repetidamente el intervalo de búsqueda a la mitad comparando con el elemento central. Esta implementación es iterativa para optimizar el uso de memoria (stack).";
     }
 
     @Override
