@@ -30,7 +30,7 @@ public class SelectionSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>>
                 T item = vector.at(j);
                 int val = valueGetter.getValue(item);
 
-                algorithmProfiler.incrementOperations(1); // Comparación val < minValue
+                algorithmProfiler.incrementOperations(1);
                 if (val < minValue) {
                     minIndex = j;
                     minValue = val;
@@ -63,7 +63,7 @@ public class SelectionSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>>
 
     @Override
     public String getDescription() {
-        return "Divide el arreglo en una parte ordenada y otra desordenada. En cada iteración busca el elemento mínimo del subarreglo desordenado y lo intercambia con el primero. Minimiza el número de escrituras de memoria (O(n)).";
+        return "En cada iteración localiza el mínimo del segmento no ordenado y lo coloca en su posición final mediante un intercambio. Minimiza el número de escrituras en memoria, aunque realiza muchas comparaciones. No es estable en su forma básica.";
     }
 
     @Override
