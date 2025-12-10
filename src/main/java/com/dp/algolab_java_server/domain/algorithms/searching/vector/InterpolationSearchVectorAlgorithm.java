@@ -32,17 +32,12 @@ public class InterpolationSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Ve
         int leftValue = valueGetter.getValue(leftItem);
         int rightValue = valueGetter.getValue(rightItem);
 
-        // 1. Verificar si el valor está fuera del rango actual
         algorithmProfiler.incrementOperations(2);
         if (valueToFind < leftValue || valueToFind > rightValue) {
             return null;
         }
-
-        // 2. Caso base: rango colapsado (elementos iguales en los extremos)
         algorithmProfiler.incrementOperations(1);
         if (leftValue == rightValue) {
-            // Recorrido lineal si los extremos son iguales para asegurar encontrarlo
-            // (aunque usualmente es el mismo item)
             for (int i = left; i <= right; i++) {
                 algorithmProfiler.incrementIterations();
                 T item = vector.at(i);
@@ -55,19 +50,9 @@ public class InterpolationSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Ve
             }
             return null;
         }
-
-        // 3. Estimación de la posición (Interpolación)
-        // Fórmula: pos = left + ((value - leftValue) * (right - left) / (rightValue -
-        // leftValue))
-        // Nota: Se usa long para evitar desbordamiento en la multiplicación antes de la
-        // división
         long numerator = (long) (valueToFind - leftValue) * (right - left);
         int pos = left + (int) (numerator / (rightValue - leftValue));
-
-        // Ajustar límites por seguridad (aunque la lógica anterior debería prevenir
-        // fuera de límites)
         pos = Math.max(left, Math.min(pos, right));
-
         T posItem = vector.at(pos);
         int posValue = valueGetter.getValue(posItem);
 
@@ -96,12 +81,12 @@ public class InterpolationSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Ve
 
     @Override
     public String getName() {
-        return "Búsqueda por interpolación (Interpolation Search)";
+        return "Búsqueda por interpolación (Interpolation search)";
     }
 
     @Override
     public String getDescription() {
-        return "Requiere arreglo ordenado. Mejora la Búsqueda Binaria para datos distribuidos uniformemente. Estima la posición del valor deseado usando una fórmula de interpolación lineal, similar a como buscamos una palabra en un diccionario real.";
+        return "Requiere arreglo ordenado y distribución uniforme. Estima la posición probable del objetivo usando una fórmula de interpolación (como buscar en un diccionario telefónico). Muy rápido en datos uniformes, pero se degrada a O(n) en peores casos.";
     }
 
     @Override
@@ -111,7 +96,7 @@ public class InterpolationSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Ve
 
     @Override
     public String getTimeComplexity() {
-        return "O(log(log n))";
+        return "O(log log n)";
     }
 
     @Override
@@ -121,7 +106,7 @@ public class InterpolationSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Ve
 
     @Override
     public String getSpaceComplexity() {
-        return "O(log n)";
+        return "O(1)";
     }
 
     @Override
