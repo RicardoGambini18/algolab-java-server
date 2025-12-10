@@ -9,6 +9,10 @@ import com.dp.algolab_java_server.common.DesignPattern;
 public class Vector<T> extends DataStructure<T> {
   private List<T> items;
 
+  public Vector() {
+    super();
+  }
+
   public Vector(List<T> data) {
     super(data);
   }
