@@ -63,7 +63,7 @@ public class InsertionSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>>
 
     @Override
     public String getDescription() {
-        return "Recorre el arreglo y, para cada elemento, lo inserta en la posición correcta de la sublista ordenada a su izquierda, desplazando los elementos mayores. Eficiente para datos pequeños o casi ordenados.";
+        return "Construye gradualmente un subarreglo ordenado insertando cada elemento en su posición correcta hacia la izquierda. Es estable y muy eficaz en arreglos pequeños o datos casi ordenados, simulando cómo se ordenan cartas en la mano.";
     }
 
     @Override
