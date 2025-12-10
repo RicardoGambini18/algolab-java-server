@@ -4,7 +4,19 @@ Algolab es un laboratorio interactivo enfocado en comparar algoritmos de búsque
 
 ## 🎯 Configuración Local Automática
 
-Este proyecto soporta **configuración automática**. Esta rutina se ejecuta automáticamente al iniciar la aplicación **solo si no existe ninguna configuración previa** (es decir, si no se detecta el archivo `.env`). En ese caso, el sistema generará el archivo `.env` necesario y configurará el entorno con valores por defecto para facilitar el despliegue local.
+Para facilitar la ejecución del proyecto, se ha implementado una **configuración automática simplificada** a través de la clase `AppProvisioner`. Esta utilidad se ejecuta automáticamente al iniciar la aplicación si no detecta una configuración existente (archivo `.env` o variables de entorno).
+
+Simplemente, al ejecutar la aplicación por primera vez, el sistema se encargará de:
+
+1.  **Crear el archivo `.env`** copiando automáticamente `.env.example`.
+2.  **Descargar la base de datos SQLite `algolab.db`** desde Google Drive y colocarla en la raíz del proyecto. Este archivo también puede generarse manualmente con el repositorio [`tmdb-db-generator`](https://github.com/RicardoGambini18/tmdb-db-generator) y ubicarse como `algolab.db`.
+3.  **Descargar y descomprimir el build del frontend** desde Google Drive (`frontend.zip`) en la carpeta `frontend/` de la raíz. Si se desea generar manualmente, se puede compilar el proyecto [`algolab-web-client`](https://github.com/RicardoGambini18/algolab-web-client).
+
+Una vez iniciada la aplicación, esta servirá el frontend automáticamente desde la carpeta `frontend/`.
+
+Al abrir la interfaz local, se debe seleccionar cualquier usuario disponible e ingresar la sección del curso (**33396**) como contraseña para iniciar sesión y comenzar a probar la aplicación.
+
+**Nota:** La primera ejecución puede tardar unos minutos mientras se descargan los recursos. Las ejecuciones posteriores serán más rápidas. Si se desea usar otra base de datos, basta con editar el `.env` generado.
 
 ## 📊 Métricas Registradas
 
@@ -77,7 +89,7 @@ Este proyecto utiliza Spring Data JPA y puede conectarse a PostgreSQL o SQLite.
 
 ### 5. (Opcional) Frontend Local
 
-Si deseas servir la interfaz de usuario localmente, compila el proyecto cliente y coloca los archivos estáticos en la carpeta `src/main/resources/static`. Spring Boot servirá estos archivos automáticamente en la raíz.
+Si deseas servir la interfaz de usuario localmente, compila el proyecto cliente y coloca los archivos compilados (`dist` o `out`) en una carpeta llamada `frontend` en la raíz del proyecto. La aplicación servirá estos archivos automáticamente.
 
 ## 🏃‍♂️ Ejecutar la Aplicación
 
@@ -110,11 +122,11 @@ Para probar los endpoints protegidos en Swagger:
    ```json
    {
      "user_id": 1,
-     "password": "YOUR_AUTH_PASSWORD"
+     "password": "35772"
    }
    ```
 2. Copia el token devuelto.
-3. Haz clic en el botón **Authorize** en la parte superior e ingresa `Bearer <TU_TOKEN>`.
+3. Haz clic en el botón **Authorize** en la parte superior e ingresa el token obtenido.
 
 ### 🔍 Endpoints Principales
 
