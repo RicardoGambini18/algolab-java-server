@@ -14,7 +14,7 @@ Simplemente, al ejecutar la aplicación por primera vez, el sistema se encargar�
 
 Una vez iniciada la aplicación, esta servirá el frontend automáticamente desde la carpeta `frontend/`.
 
-Al abrir la interfaz local, se debe seleccionar cualquier usuario disponible e ingresar la sección del curso (**33396**) como contraseña para iniciar sesión y comenzar a probar la aplicación.
+Al abrir la interfaz local, se debe seleccionar cualquier usuario disponible e ingresar la sección del curso (**35772**) como contraseña para iniciar sesión y comenzar a probar la aplicación.
 
 **Nota:** La primera ejecución puede tardar unos minutos mientras se descargan los recursos. Las ejecuciones posteriores serán más rápidas. Si se desea usar otra base de datos, basta con editar el `.env` generado.
 
