@@ -1,27 +1,29 @@
-package com.dp.algolab_java_server.domain.algorithms;
+package com.dp.algolab_java_server.domain.algorithms.searching;
 
 import java.util.List;
-import lombok.RequiredArgsConstructor;
 
 import com.dp.algolab_java_server.common.DesignPattern;
+import com.dp.algolab_java_server.domain.algorithms.BaseAlgorithm;
 import com.dp.algolab_java_server.domain.dtos.SearchAlgorithmResult;
 import com.dp.algolab_java_server.domain.algorithms.utils.ValueGetter;
-import com.dp.algolab_java_server.domain.enums.AlgorithmComplexityLevel;
-import com.dp.algolab_java_server.domain.algorithms.utils.MetricsManager;
+import com.dp.algolab_java_server.domain.data_structures.DataStructure;
+import com.dp.algolab_java_server.domain.dtos.SearchAlgorithmDefinition;
+import com.dp.algolab_java_server.domain.algorithms.utils.AlgorithmProfiler;
 
-@RequiredArgsConstructor
 @DesignPattern(name = "Template Method", solvedProblem = "Estandariza el flujo de ejecución (inicio métricas -> búsqueda -> fin métricas -> construcción resultado) en la clase base, delegando la lógica específica de búsqueda a las subclases.")
 @DesignPattern(name = "Strategy", solvedProblem = "Define una familia de algoritmos de búsqueda intercambiables bajo un contrato común, permitiendo que el cliente seleccione la estrategia concreta (Lineal, Binaria, etc.) sin acoplarse a su implementación.")
-public abstract class SearchAlgorithm<T> {
-  protected final ValueGetter<T> valueGetter;
-  protected final MetricsManager metricsManager;
+public abstract class SearchAlgorithm<T, S extends DataStructure<T>> extends BaseAlgorithm<T, S> {
+  public SearchAlgorithm(ValueGetter<T> valueGetter, AlgorithmProfiler algorithmProfiler) {
+    super(valueGetter, algorithmProfiler);
+  }
 
   public SearchAlgorithmResult<T> execute(List<T> data, Integer valueToFind) {
-    metricsManager.start();
+    S dataStructure = createDataStructure(data);
+    dataStructure.setAlgorithmProfiler(algorithmProfiler);
 
-    T itemFound = search(data, valueToFind);
-
-    metricsManager.end();
+    algorithmProfiler.start();
+    T itemFound = search(dataStructure, valueToFind);
+    algorithmProfiler.end();
 
     Integer position = null;
 
@@ -32,12 +34,12 @@ public abstract class SearchAlgorithm<T> {
 
     return SearchAlgorithmResult.<T>builder()
         .algorithm(getName())
-        .dataStructure(getDataStructureName())
+        .dataStructure(dataStructure.getName())
         .itemCount(data.size())
         .itemFound(itemFound)
         .itemFoundPosition(position)
         .needsSort(needsSort())
-        .metrics(metricsManager.getMetrics())
+        .metrics(algorithmProfiler.getMetrics())
         .timeComplexity(getTimeComplexity())
         .timeComplexityLevel(getTimeComplexityLevel())
         .spaceComplexity(getSpaceComplexity())
@@ -45,19 +47,21 @@ public abstract class SearchAlgorithm<T> {
         .build();
   }
 
-  protected abstract T search(List<T> data, Integer valueToFind);
-
-  public abstract String getDataStructureName();
-
-  public abstract String getName();
+  protected abstract T search(S dataStructure, Integer valueToFind);
 
   public abstract boolean needsSort();
 
-  public abstract String getTimeComplexity();
-
-  public abstract AlgorithmComplexityLevel getTimeComplexityLevel();
-
-  public abstract String getSpaceComplexity();
-
-  public abstract AlgorithmComplexityLevel getSpaceComplexityLevel();
+  @Override
+  public SearchAlgorithmDefinition toDefinition() {
+    return SearchAlgorithmDefinition.builder()
+        .key(getKey())
+        .name(getName())
+        .description(getDescription())
+        .timeComplexity(getTimeComplexity())
+        .timeComplexityLevel(getTimeComplexityLevel())
+        .spaceComplexity(getSpaceComplexity())
+        .spaceComplexityLevel(getSpaceComplexityLevel())
+        .needsSort(needsSort())
+        .build();
+  }
 }
