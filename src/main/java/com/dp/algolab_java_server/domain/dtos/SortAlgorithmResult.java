@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.dp.algolab_java_server.common.DesignPattern;
 
@@ -17,5 +18,6 @@ import com.dp.algolab_java_server.common.DesignPattern;
 public class SortAlgorithmResult<T> extends AlgorithmResult {
   @JsonProperty("sorted_data")
   @Schema(description = "Lista de datos ordenados")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   private List<T> sortedData;
 }

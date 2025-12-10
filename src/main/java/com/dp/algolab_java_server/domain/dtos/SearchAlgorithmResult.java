@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.dp.algolab_java_server.common.DesignPattern;
 
@@ -20,9 +21,11 @@ public class SearchAlgorithmResult<T> extends AlgorithmResult {
 
   @JsonProperty("item_found")
   @Schema(description = "El elemento encontrado")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   private T itemFound;
 
   @JsonProperty("item_found_position")
   @Schema(description = "Posición del elemento encontrado")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   private Integer itemFoundPosition;
 }

@@ -17,7 +17,7 @@ public abstract class SearchAlgorithm<T, S extends DataStructure<T>> extends Bas
     super(valueGetter, algorithmProfiler);
   }
 
-  public SearchAlgorithmResult<T> execute(List<T> data, Integer valueToFind) {
+  public SearchAlgorithmResult<T> execute(List<T> data, Integer valueToFind, boolean includeResult) {
     S dataStructure = createDataStructure(data);
     dataStructure.setAlgorithmProfiler(algorithmProfiler);
 
@@ -32,19 +32,23 @@ public abstract class SearchAlgorithm<T, S extends DataStructure<T>> extends Bas
       position = position == -1 ? null : position + 1;
     }
 
-    return SearchAlgorithmResult.<T>builder()
+    var builder = SearchAlgorithmResult.<T>builder()
         .algorithm(getName())
         .dataStructure(dataStructure.getName())
         .itemCount(data.size())
-        .itemFound(itemFound)
         .itemFoundPosition(position)
         .needsSort(needsSort())
         .metrics(algorithmProfiler.getMetrics())
         .timeComplexity(getTimeComplexity())
         .timeComplexityLevel(getTimeComplexityLevel())
         .spaceComplexity(getSpaceComplexity())
-        .spaceComplexityLevel(getSpaceComplexityLevel())
-        .build();
+        .spaceComplexityLevel(getSpaceComplexityLevel());
+
+    if (includeResult) {
+      builder.itemFound(itemFound);
+    }
+
+    return builder.build();
   }
 
   protected abstract T search(S dataStructure, Integer valueToFind);

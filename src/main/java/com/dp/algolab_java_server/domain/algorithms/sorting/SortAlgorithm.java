@@ -17,7 +17,7 @@ public abstract class SortAlgorithm<T, S extends DataStructure<T>> extends BaseA
     super(valueGetter, algorithmProfiler);
   }
 
-  public SortAlgorithmResult<T> execute(List<T> data) {
+  public SortAlgorithmResult<T> execute(List<T> data, boolean includeResult) {
     S dataStructure = createDataStructure(data);
     dataStructure.setAlgorithmProfiler(algorithmProfiler);
 
@@ -25,17 +25,21 @@ public abstract class SortAlgorithm<T, S extends DataStructure<T>> extends BaseA
     S sortedDataStructure = sort(dataStructure);
     algorithmProfiler.end();
 
-    return SortAlgorithmResult.<T>builder()
+    var builder = SortAlgorithmResult.<T>builder()
         .algorithm(getName())
         .dataStructure(dataStructure.getName())
         .itemCount(data.size())
-        .sortedData(sortedDataStructure.toList())
         .metrics(algorithmProfiler.getMetrics())
         .timeComplexity(getTimeComplexity())
         .timeComplexityLevel(getTimeComplexityLevel())
         .spaceComplexity(getSpaceComplexity())
-        .spaceComplexityLevel(getSpaceComplexityLevel())
-        .build();
+        .spaceComplexityLevel(getSpaceComplexityLevel());
+
+    if (includeResult) {
+      builder.sortedData(sortedDataStructure.toList());
+    }
+
+    return builder.build();
   }
 
   protected abstract S sort(S dataStructure);
