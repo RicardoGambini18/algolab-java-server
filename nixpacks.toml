@@ -1,0 +1,5 @@
+[phases.setup]
+nixPkgs = ["jdk21"]
+
+[phases.build]
+cmds = ["chmod +x mvnw", "./mvnw clean package -DskipTests"]
