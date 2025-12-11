@@ -13,8 +13,10 @@ import org.springframework.beans.factory.ObjectProvider;
 
 import com.dp.algolab_java_server.common.DesignPattern;
 import com.dp.algolab_java_server.domain.entities.Movie;
-import com.dp.algolab_java_server.domain.data_structures.Vector;
+import com.dp.algolab_java_server.domain.data_structures.*;
+import com.dp.algolab_java_server.domain.algorithms.sorting.stack.*;
 import com.dp.algolab_java_server.domain.algorithms.sorting.vector.*;
+import com.dp.algolab_java_server.domain.algorithms.searching.stack.*;
 import com.dp.algolab_java_server.domain.dtos.DataStructureDefinition;
 import com.dp.algolab_java_server.domain.dtos.SortAlgorithmDefinition;
 import com.dp.algolab_java_server.domain.algorithms.AlgorithmProvider;
@@ -38,6 +40,15 @@ public class AlgorithmProviderImpl implements AlgorithmProvider {
 
   @PostConstruct
   public void init() {
+    // Stack
+    Stack<?> stack = new Stack<>();
+    registerDataStructure(stack);
+    // Stack Sorting Algorithms
+    registerSortingAlgorithm(stack.getKey(),
+        algorithmProfiler -> new SortStackAlgorithm<>(Movie::getId, algorithmProfiler));
+    // Stack Searching Algorithms
+    registerSearchingAlgorithm(stack.getKey(),
+        algorithmProfiler -> new LinearSearchStackAlgorithm<>(Movie::getId, algorithmProfiler));
     // Vector
     Vector<?> vector = new Vector<>();
     registerDataStructure(vector);
