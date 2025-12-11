@@ -18,6 +18,8 @@ Al abrir la interfaz local, se debe seleccionar cualquier usuario disponible e i
 
 **Nota:** La primera ejecución puede tardar unos minutos mientras se descargan los recursos. Las ejecuciones posteriores serán más rápidas. Si se desea usar otra base de datos, basta con editar el `.env` generado.
 
+> **⚠️ Nota Importante:** Si no se necesita ejecutar la aplicación localmente, se puede utilizar la versión desplegada en **https://algolab-dp.up.railway.app**.
+
 ## 📊 Métricas Registradas
 
 Cada ejecución de un algoritmo reporta las siguientes métricas para facilitar el análisis comparativo:
