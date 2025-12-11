@@ -83,6 +83,6 @@ public class Stack<T> extends DataStructure<T> {
 
   @Override
   public String getDescription() {
-    return "Estructura de datos lineal que sigue el principio LIFO (Last In, First Out). El acceso está restringido estrictamente a la cima (tope). Es fundamental para la gestión de memoria (call stack), recursividad y evaluación de expresiones.";
+    return "Estructura lineal LIFO (Last In, First Out). Implementada sobre la clase legacy 'java.util.Stack', la cual es sincronizada (Thread-Safe). Esto garantiza seguridad en concurrencia pero añade un overhead significativo de tiempo en cada operación debido al bloqueo de monitor, haciéndola más lenta que implementaciones no sincronizadas.";
   }
 }

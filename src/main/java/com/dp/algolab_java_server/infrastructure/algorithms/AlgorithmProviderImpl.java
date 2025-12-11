@@ -15,8 +15,10 @@ import com.dp.algolab_java_server.common.DesignPattern;
 import com.dp.algolab_java_server.domain.entities.Movie;
 import com.dp.algolab_java_server.domain.data_structures.*;
 import com.dp.algolab_java_server.domain.algorithms.sorting.stack.*;
+import com.dp.algolab_java_server.domain.algorithms.sorting.queue.*;
 import com.dp.algolab_java_server.domain.algorithms.sorting.vector.*;
 import com.dp.algolab_java_server.domain.algorithms.searching.stack.*;
+import com.dp.algolab_java_server.domain.algorithms.searching.queue.*;
 import com.dp.algolab_java_server.domain.dtos.DataStructureDefinition;
 import com.dp.algolab_java_server.domain.dtos.SortAlgorithmDefinition;
 import com.dp.algolab_java_server.domain.algorithms.AlgorithmProvider;
@@ -49,6 +51,19 @@ public class AlgorithmProviderImpl implements AlgorithmProvider {
     // Stack Searching Algorithms
     registerSearchingAlgorithm(stack.getKey(),
         algorithmProfiler -> new LinearSearchStackAlgorithm<>(Movie::getId, algorithmProfiler));
+
+    // Queue
+    Queue<?> queue = new Queue<>();
+    registerDataStructure(queue);
+    // Queue Sorting Algorithms
+    registerSortingAlgorithm(queue.getKey(),
+        algorithmProfiler -> new SelectionSortQueueAlgorithm<>(Movie::getId, algorithmProfiler));
+    registerSortingAlgorithm(queue.getKey(),
+        algorithmProfiler -> new MergeSortQueueAlgorithm<>(Movie::getId, algorithmProfiler));
+    // Queue Searching Algorithms
+    registerSearchingAlgorithm(queue.getKey(),
+        algorithmProfiler -> new LinearSearchQueueAlgorithm<>(Movie::getId, algorithmProfiler));
+
     // Vector
     Vector<?> vector = new Vector<>();
     registerDataStructure(vector);
