@@ -4,17 +4,26 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import com.dp.algolab_java_server.common.DesignPattern;
+import com.dp.algolab_java_server.domain.algorithms.utils.AlgorithmProfiler;
 
 @DesignPattern(name = "Adapter", solvedProblem = "Adapta la colección estándar 'ArrayList' de Java a la interfaz específica requerida por los algoritmos, centralizando operaciones de acceso y manipulación.")
 public class Vector<T> extends DataStructure<T> {
   private List<T> items;
 
-  public Vector() {
-    super();
+  public Vector(List<T> data, AlgorithmProfiler algorithmProfiler) {
+    super(data, algorithmProfiler);
   }
 
   public Vector(List<T> data) {
     super(data);
+  }
+
+  public Vector(AlgorithmProfiler algorithmProfiler) {
+    super(algorithmProfiler);
+  }
+
+  public Vector() {
+    super();
   }
 
   @Override

@@ -38,7 +38,7 @@ public class MovieServiceImpl implements MovieService {
     int limit = appProperties.getMoviesSortLimit();
     Pageable pageable = PageRequest.of(0, limit);
 
-    return movieRepository.findAllByOrderByTitleAsc(pageable);
+    return movieRepository.findAllByOrderByTitleAscIdDesc(pageable);
   }
 
   @Override

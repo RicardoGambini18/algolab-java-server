@@ -18,6 +18,7 @@ public class JumpSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Vector<T>> 
     @Override
     protected T search(Vector<T> vector, Integer valueToFind) {
         int n = vector.length();
+
         if (n == 0)
             return null;
 
@@ -33,9 +34,11 @@ public class JumpSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Vector<T>> 
             int val = valueGetter.getValue(item);
 
             algorithmProfiler.incrementOperations(1);
+
             if (val < valueToFind) {
                 prev = step;
                 step += stepSize;
+
                 if (prev >= n) {
                     return null;
                 }
@@ -45,6 +48,7 @@ public class JumpSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Vector<T>> 
         }
 
         int end = Math.min(step, n);
+
         for (int i = prev; i < end; i++) {
             algorithmProfiler.incrementIterations();
 
@@ -52,6 +56,7 @@ public class JumpSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Vector<T>> 
             int val = valueGetter.getValue(item);
 
             algorithmProfiler.incrementOperations(1);
+
             if (val == valueToFind) {
                 return item;
             }

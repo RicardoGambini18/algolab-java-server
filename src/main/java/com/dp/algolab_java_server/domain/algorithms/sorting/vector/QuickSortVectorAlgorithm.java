@@ -1,6 +1,5 @@
 package com.dp.algolab_java_server.domain.algorithms.sorting.vector;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.dp.algolab_java_server.common.DesignPattern;
@@ -25,6 +24,7 @@ public class QuickSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
         algorithmProfiler.incrementIterations();
 
         int n = data.length();
+
         if (n <= 1) {
             return data;
         }
@@ -32,14 +32,9 @@ public class QuickSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
         T pivot = data.at(n / 2);
         int pivotValue = valueGetter.getValue(pivot);
 
-        Vector<T> left = new Vector<>(new ArrayList<>());
-        left.setAlgorithmProfiler(algorithmProfiler);
-
-        Vector<T> middle = new Vector<>(new ArrayList<>());
-        middle.setAlgorithmProfiler(algorithmProfiler);
-
-        Vector<T> right = new Vector<>(new ArrayList<>());
-        right.setAlgorithmProfiler(algorithmProfiler);
+        Vector<T> left = new Vector<>(algorithmProfiler);
+        Vector<T> middle = new Vector<>(algorithmProfiler);
+        Vector<T> right = new Vector<>(algorithmProfiler);
 
         for (int i = 0; i < n; i++) {
             algorithmProfiler.incrementIterations();
@@ -48,10 +43,12 @@ public class QuickSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
             int xValue = valueGetter.getValue(x);
 
             algorithmProfiler.incrementOperations(1);
+
             if (xValue < pivotValue) {
                 left.push(x);
             } else {
                 algorithmProfiler.incrementOperations(1);
+
                 if (xValue == pivotValue) {
                     middle.push(x);
                 } else {
@@ -63,8 +60,7 @@ public class QuickSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
         Vector<T> leftSorted = recursiveQuickSort(left);
         Vector<T> rightSorted = recursiveQuickSort(right);
 
-        Vector<T> result = new Vector<>(new ArrayList<>());
-        result.setAlgorithmProfiler(algorithmProfiler);
+        Vector<T> result = new Vector<>(algorithmProfiler);
 
         result.extend(leftSorted);
         result.extend(middle);
@@ -95,7 +91,7 @@ public class QuickSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
 
     @Override
     public String getTimeComplexity() {
-        return "O(n log n)";
+        return "O(n\\log n)";
     }
 
     @Override
@@ -105,7 +101,7 @@ public class QuickSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
 
     @Override
     public String getSpaceComplexity() {
-        return "O(n log n)";
+        return "O(\\log n)";
     }
 
     @Override

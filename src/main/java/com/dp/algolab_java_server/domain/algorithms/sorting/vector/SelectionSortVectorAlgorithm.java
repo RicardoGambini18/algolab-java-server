@@ -21,16 +21,19 @@ public class SelectionSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>>
 
         for (int i = 0; i < n; i++) {
             algorithmProfiler.incrementIterations();
+
             int minIndex = i;
             T minItem = vector.at(i);
             int minValue = valueGetter.getValue(minItem);
 
             for (int j = i + 1; j < n; j++) {
                 algorithmProfiler.incrementIterations();
+
                 T item = vector.at(j);
                 int val = valueGetter.getValue(item);
 
                 algorithmProfiler.incrementOperations(1);
+
                 if (val < minValue) {
                     minIndex = j;
                     minValue = val;
@@ -58,7 +61,7 @@ public class SelectionSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>>
 
     @Override
     public String getName() {
-        return "Ordenamiento por selección (Selection Sort)";
+        return "Ordenamiento por selección (Selection sort)";
     }
 
     @Override

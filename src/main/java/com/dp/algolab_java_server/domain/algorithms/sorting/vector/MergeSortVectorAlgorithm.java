@@ -1,6 +1,5 @@
 package com.dp.algolab_java_server.domain.algorithms.sorting.vector;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.dp.algolab_java_server.common.DesignPattern;
@@ -42,8 +41,7 @@ public class MergeSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
     }
 
     private Vector<T> merge(Vector<T> left, Vector<T> right) {
-        Vector<T> merged = new Vector<>(new ArrayList<>());
-        merged.setAlgorithmProfiler(algorithmProfiler);
+        Vector<T> merged = new Vector<>(algorithmProfiler);
 
         int i = 0;
         int j = 0;
@@ -59,6 +57,7 @@ public class MergeSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
             int valB = valueGetter.getValue(itemB);
 
             algorithmProfiler.incrementOperations(1);
+
             if (valA <= valB) {
                 merged.push(itemA);
                 i++;
@@ -69,7 +68,6 @@ public class MergeSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
         }
 
         if (i < nLeft) {
-
             merged.extend(left.slice(i, nLeft));
         }
 
@@ -102,7 +100,7 @@ public class MergeSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>> {
 
     @Override
     public String getTimeComplexity() {
-        return "O(n log n)";
+        return "O(n\\log n)";
     }
 
     @Override

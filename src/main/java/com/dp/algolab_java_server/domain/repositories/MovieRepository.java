@@ -13,5 +13,5 @@ import com.dp.algolab_java_server.domain.entities.Movie;
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
   List<Movie> findAllByOrderByIdAsc();
 
-  List<Movie> findAllByOrderByTitleAsc(Pageable pageable);
+  List<Movie> findAllByOrderByTitleAscIdDesc(Pageable pageable);
 }

@@ -33,35 +33,44 @@ public class InterpolationSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Ve
         int rightValue = valueGetter.getValue(rightItem);
 
         algorithmProfiler.incrementOperations(2);
+
         if (valueToFind < leftValue || valueToFind > rightValue) {
             return null;
         }
+
         algorithmProfiler.incrementOperations(1);
+
         if (leftValue == rightValue) {
             for (int i = left; i <= right; i++) {
                 algorithmProfiler.incrementIterations();
+
                 T item = vector.at(i);
                 int itemVal = valueGetter.getValue(item);
 
                 algorithmProfiler.incrementOperations(1);
+
                 if (itemVal == valueToFind) {
                     return item;
                 }
             }
             return null;
         }
+
         long numerator = (long) (valueToFind - leftValue) * (right - left);
         int pos = left + (int) (numerator / (rightValue - leftValue));
         pos = Math.max(left, Math.min(pos, right));
+
         T posItem = vector.at(pos);
         int posValue = valueGetter.getValue(posItem);
 
         algorithmProfiler.incrementOperations(1);
+
         if (posValue == valueToFind) {
             return posItem;
         }
 
         algorithmProfiler.incrementOperations(1);
+
         if (posValue < valueToFind) {
             return recursiveInterpolationSearch(vector, pos + 1, right, valueToFind);
         } else {
@@ -96,7 +105,7 @@ public class InterpolationSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Ve
 
     @Override
     public String getTimeComplexity() {
-        return "O(log log n)";
+        return "O(\\log\\log n)";
     }
 
     @Override

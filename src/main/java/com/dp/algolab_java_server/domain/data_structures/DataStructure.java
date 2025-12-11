@@ -11,12 +11,21 @@ import com.dp.algolab_java_server.domain.algorithms.utils.AlgorithmProfiler;
 public abstract class DataStructure<T> {
   protected AlgorithmProfiler algorithmProfiler;
 
-  public DataStructure() {
-    this(Collections.emptyList());
+  public DataStructure(List<T> data, AlgorithmProfiler algorithmProfiler) {
+    this.algorithmProfiler = algorithmProfiler;
+    buildFromList(data != null ? data : Collections.emptyList());
   }
 
   public DataStructure(List<T> data) {
     buildFromList(data != null ? data : Collections.emptyList());
+  }
+
+  public DataStructure(AlgorithmProfiler algorithmProfiler) {
+    this(Collections.emptyList(), algorithmProfiler);
+  }
+
+  public DataStructure() {
+    this(Collections.emptyList());
   }
 
   public void setAlgorithmProfiler(AlgorithmProfiler algorithmProfiler) {

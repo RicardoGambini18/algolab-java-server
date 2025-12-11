@@ -27,12 +27,14 @@ public class InsertionSortVectorAlgorithm<T> extends SortAlgorithm<T, Vector<T>>
             int j = i - 1;
 
             while (j >= 0) {
+                algorithmProfiler.incrementIterations();
+
                 T currentItem = vector.at(j);
                 int currentValue = valueGetter.getValue(currentItem);
 
                 algorithmProfiler.incrementOperations(1);
+
                 if (currentValue > keyValue) {
-                    algorithmProfiler.incrementIterations();
                     vector.update(j + 1, currentItem);
                     j--;
                 } else {

@@ -24,15 +24,18 @@ public class BinarySearchVectorAlgorithm<T> extends SearchAlgorithm<T, Vector<T>
             algorithmProfiler.incrementIterations();
 
             int mid = (low + high) / 2;
+
             T item = vector.at(mid);
             int val = valueGetter.getValue(item);
 
             algorithmProfiler.incrementOperations(1);
+
             if (val == valueToFind) {
                 return item;
             }
 
             algorithmProfiler.incrementOperations(1);
+
             if (val < valueToFind) {
                 low = mid + 1;
             } else {
@@ -70,7 +73,7 @@ public class BinarySearchVectorAlgorithm<T> extends SearchAlgorithm<T, Vector<T>
 
     @Override
     public String getTimeComplexity() {
-        return "O(log n)";
+        return "O(\\log n)";
     }
 
     @Override

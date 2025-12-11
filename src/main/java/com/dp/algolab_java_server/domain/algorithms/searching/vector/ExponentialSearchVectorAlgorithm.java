@@ -18,6 +18,7 @@ public class ExponentialSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Vect
     @Override
     protected T search(Vector<T> vector, Integer valueToFind) {
         int n = vector.length();
+
         if (n == 0)
             return null;
 
@@ -25,11 +26,13 @@ public class ExponentialSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Vect
         int firstVal = valueGetter.getValue(firstItem);
 
         algorithmProfiler.incrementOperations(1);
+
         if (firstVal == valueToFind) {
             return firstItem;
         }
 
         int i = 1;
+
         while (i < n) {
             algorithmProfiler.incrementIterations();
 
@@ -37,6 +40,7 @@ public class ExponentialSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Vect
             int val = valueGetter.getValue(item);
 
             algorithmProfiler.incrementOperations(1);
+
             if (val > valueToFind) {
                 break;
             }
@@ -59,11 +63,13 @@ public class ExponentialSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Vect
             int val = valueGetter.getValue(item);
 
             algorithmProfiler.incrementOperations(1);
+
             if (val == valueToFind) {
                 return item;
             }
 
             algorithmProfiler.incrementOperations(1);
+
             if (val < valueToFind) {
                 low = mid + 1;
             } else {
@@ -100,7 +106,7 @@ public class ExponentialSearchVectorAlgorithm<T> extends SearchAlgorithm<T, Vect
 
     @Override
     public String getTimeComplexity() {
-        return "O(log n)";
+        return "O(\\log n)";
     }
 
     @Override
