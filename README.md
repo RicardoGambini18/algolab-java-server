@@ -2,10 +2,6 @@
 
 Algolab es un laboratorio interactivo enfocado en comparar algoritmos de búsqueda y ordenamiento, midiendo tiempo de ejecución, uso de memoria, número de operaciones y número de iteraciones para cada implementación disponible. Esta es la versión Java del servidor.
 
-## 🎥 Video Demostrativo
-
-[![Video Demostrativo de Algolab](https://img.youtube.com/vi/6NPVegrthoE/maxresdefault.jpg)](https://www.youtube.com/watch?v=6NPVegrthoE)
-
 ## 🎯 Configuración Local Automática
 
 Para facilitar la ejecución del proyecto, se ha implementado una **configuración automática simplificada** a través de la clase `AppProvisioner`. Esta utilidad se ejecuta automáticamente al iniciar la aplicación si no detecta una configuración existente (archivo `.env` o variables de entorno).

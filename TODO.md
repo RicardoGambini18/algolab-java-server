@@ -1,0 +1,3 @@
+- [ ] Desplegar la app en Railway
+- [ ] Hacer audit final de anotaciones de design pattern y solid principles
+- [ ] Implementar listas enlazadas y arboles
